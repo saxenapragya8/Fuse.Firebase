@@ -1,0 +1,37 @@
+{
+  "Packages": [
+    "Fuse",
+    "FuseJS",
+    "Fuse.BasicTheme"
+  ],
+  "Projects": [
+    "../src/Firebase/Firebase.unoproj",
+    "../src/Firebase.Authentication/Firebase.Authentication.unoproj",
+    "../src/Firebase.Authentication.Google/Firebase.Authentication.Google.unoproj"
+  ],
+  "Android": {
+    "SDK": {
+      "BuildToolsVersion": "26.0.1",
+      "CompileVersion": 26,
+      "MinVersion": 22,
+      "TargetVersion": 26
+    },
+    "Description": "",
+    "Package": "com.apps.authexample",
+    "VersionCode": 1
+  },
+  "Google": {
+    "RequestID": "489230009050-8tk781vml7pbpnjluevf1o7ru4th2pnf.apps.googleusercontent.com"
+  },
+  "iOS": {
+    "PList": {
+      "UriSchemes": [
+        "com.googleusercontent.apps.489230009050-bb0ssntrsubt3dl6emabcpe6p14vdl58"
+      ]
+    }
+  },
+  "Includes": [
+    "*",
+    "GoogleService-Info.plist:ObjCSource:iOS"
+  ]
+}

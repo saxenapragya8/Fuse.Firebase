@@ -1,0 +1,11 @@
+<DockPanel ux:Class="LoginPage">
+	<Router ux:Dependency="router" />
+		<JavaScript File="LoginPage.js"/>
+		<Page Name="login">
+				<StackPanel Width="92%" Height="460" Padding="20">
+		            <NativeViewHost >
+        	            <Firebase.Authentication.Google.GoogleButton Margin="0,20,0,0"/>
+             	    </NativeViewHost>
+				</StackPanel>
+		</Page>
+</DockPanel>
