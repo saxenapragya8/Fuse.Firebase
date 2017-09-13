@@ -1,6 +1,7 @@
 var Observable = require("FuseJS/Observable");
 var FirebaseUser = require("Firebase/Authentication/User");
 var GAuth = require("Firebase/Authentication/Google");
+var FirebaseDb = require("../../Database/FirebaseDb");
 //---
 
 var defaultStatusMessage = "Status OK";
@@ -28,29 +29,30 @@ var currentPageTitle = currentPage.map(function(x) {
 function signedIn() {
     signedInStatusText.value = defaultStatusMessage;
     currentPage.value = {title: "Logged In Page", handle: "loggedInPage"};
-    updateUserDetailsUI();
+    updateUserDetailsDb();
 }
 
 function signedOut() {
     currentPage.value = mainPage;
-    updateUserDetailsUI();
+    updateUserDetailsDb();
 }
 
 //---
 
-var updateUserDetailsUI = function() {
+var updateUserDetailsDb = function() {
     if (FirebaseUser.isSignedIn) {
-        userName.value = FirebaseUser.name;
-        userEmail.value = FirebaseUser.email;
-        userPhotoUrl.value = FirebaseUser.photoUrl;
+        var userMap = {
+            "userName": FirebaseUser.name,
+            "userEmail": FirebaseUser.email,
+            "userPhotoUrl": FirebaseUser.photoUrl,
+            "displayName": FirebaseUser.displayName
+        };
+        FirebaseDb.saveUserDetails(FirebaseUser.uid, userMap);
     } else {
         userName.value = "-";
         userEmail.value = "-";
         userPhotoUrl.value = "-";
     }
-    console.log("username " + userName.value);
-    console.log("username " + userEmail.value);
-    console.log("username " + userPhotoUrl.value);
 };
 
 FirebaseUser.onError = function(errorMsg, errorCode) {
@@ -65,36 +67,9 @@ FirebaseUser.signedInStateChanged = function() {
         signedOut();
 };
 
-//---
-
-// var userEmailInput = Observable("");
-// var userPasswordInput = Observable("");
-
-// var createUser = function() {
-//     var email = userEmailInput.value;
-//     var password = userPasswordInput.value;
-//     EAuth.createWithEmailAndPassword(email, password).then(function(user) {
-//         signedIn();
-//     }).catch(function(e) {
-//         console.log("Signup failed: " + e);
-//         FirebaseUser.onError(e, -1);
-//     });
-// };
-
-// var signInWithEmail = function() {
-//     var email = userEmailInput.value;
-//     var password = userPasswordInput.value;
-//     EAuth.signInWithEmailAndPassword(email, password).then(function(user) {
-//         signedIn();
-//     }).catch(function(e) {
-//         console.log("SignIn failed: " + e);
-//         FirebaseUser.onError(e, -1);
-//     });
-// };
-
 GAuth.onAuth = function() {
     console.log("onAuth called");
-    updateUserDetailsUI();
+    updateUserDetailsDb();
     router.goto("mainPage");
 };
 

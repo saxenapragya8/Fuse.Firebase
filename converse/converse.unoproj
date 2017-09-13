@@ -7,7 +7,8 @@
   "Projects": [
     "../src/Firebase/Firebase.unoproj",
     "../src/Firebase.Authentication/Firebase.Authentication.unoproj",
-    "../src/Firebase.Authentication.Google/Firebase.Authentication.Google.unoproj"
+    "../src/Firebase.Authentication.Google/Firebase.Authentication.Google.unoproj",
+    "../src/Firebase.Database/Firebase.Database.unoproj",
   ],
   "Android": {
     "SDK": {
@@ -32,6 +33,7 @@
   },
   "Includes": [
     "*",
-    "GoogleService-Info.plist:ObjCSource:iOS"
+    "GoogleService-Info.plist:ObjCSource:iOS",
+    "Database/*.js:Bundle"
   ]
 }

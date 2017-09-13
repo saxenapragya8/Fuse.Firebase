@@ -117,6 +117,7 @@ namespace Firebase.Database
         extern(Android)
         public static string NewChildId(string path)
         @{
+            System.out.println("java path" + path);
             DatabaseReference ref = (DatabaseReference)@{DatabaseService._handle:Get()};
             return ref.child(path).push().getKey();
         @}
